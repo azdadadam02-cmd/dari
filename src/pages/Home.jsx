@@ -1,5 +1,3 @@
-import { useSearchParams } from 'react-router-dom'
-import { CATEGORIES } from '../data'
 import Listings from '../components/Listings'
 
 // Les 3 blocs dyal "Pourquoi dari"
@@ -10,16 +8,8 @@ const AVANTAGES = [
 ]
 
 export default function Home({ properties }) {
-  const [, setParams] = useSearchParams()
-
   const scrollToAnnonces = () =>
     document.getElementById('annonces').scrollIntoView({ behavior: 'smooth' })
-
-  // clic 3la carré dyal catégorie: nfiltriw la liste lte7t w nhbtou liha
-  const choisirCategorie = (c) => {
-    setParams({ cat: c }, { replace: true })
-    scrollToAnnonces()
-  }
 
   return (
     <main>
@@ -37,18 +27,6 @@ export default function Home({ properties }) {
             naviguer maintenant
           </button>
         </div>
-      </section>
-
-      <section className="tiles">
-        {CATEGORIES.filter((c) => c !== 'tous').map((c) => {
-          const n = properties.filter((p) => p.categorie === c).length
-          return (
-            <button key={c} onClick={() => choisirCategorie(c)}>
-              <strong>{c}</strong>
-              <span>{n} {n > 1 ? 'propriétés' : 'propriété'}</span>
-            </button>
-          )
-        })}
       </section>
 
       <Listings properties={properties} />

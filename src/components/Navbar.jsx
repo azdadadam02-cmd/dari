@@ -1,11 +1,10 @@
 import { Link, NavLink } from 'react-router-dom'
+import Logo from './Logo'
 
 export default function Navbar({ user }) {
   return (
     <nav className="navbar">
-      <Link to="/" className="logo">
-        <span className="logo-house">d</span>ari
-      </Link>
+      <Link to="/" className="logo"><Logo /></Link>
 
       <div className="nav-links">
         <NavLink to="/" end>HOME</NavLink>

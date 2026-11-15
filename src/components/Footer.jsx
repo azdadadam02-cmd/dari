@@ -1,9 +1,11 @@
+import Logo from './Logo'
+
 export default function Footer() {
   return (
     <footer className="footer">
       <div className="footer-cols">
         <div>
-          <p className="logo"><span className="logo-house">d</span>ari</p>
+          <p className="logo"><Logo /></p>
           <p>Votre plateforme pour acheter ou louer un bien immobilier au Maroc.</p>
         </div>
         <div>

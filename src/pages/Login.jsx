@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import Logo from '../components/Logo'
 
 // Login "fake" (bla backend): kankhbiw ghir smiya w email f localStorage.
 // L mot de passe ma kankhbiwh f ta blasa.
@@ -18,7 +19,7 @@ export default function Login({ setUser }) {
     <div className="login">
       {/* jiha lowla: tsswira dyal l3a9ar */}
       <div className="login-image">
-        <Link to="/" className="logo"><span className="logo-house">d</span>ari</Link>
+        <Link to="/" className="logo"><Logo /></Link>
         <div>
           <h2>Trouvez la propriété de vos rêves <span className="script">au Maroc.</span></h2>
           <p>Achetez ou louez en toute confiance avec nos agences partenaires.</p>
