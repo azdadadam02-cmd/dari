@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import { PROPERTIES, useStorage } from './data'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -14,10 +14,13 @@ export default function App() {
   const properties = PROPERTIES
   const [user, setUser] = useStorage('dari-user', null)
 
+  // page login katban bohdha: bla topbar, navbar w footer
+  const pageSeule = useLocation().pathname === '/login'
+
   return (
     <>
-      <div className="topbar">DARI IMMOBILIER</div>
-      <Navbar user={user} />
+      {!pageSeule && <div className="topbar">DARI IMMOBILIER</div>}
+      {!pageSeule && <Navbar user={user} />}
       <Routes>
         <Route path="/" element={<Home properties={properties} />} />
         <Route path="/acheter" element={<Annonces properties={properties} type="vente" titre="Acheter un bien" />} />
@@ -27,7 +30,7 @@ export default function App() {
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/compte" element={<Compte user={user} setUser={setUser} />} />
       </Routes>
-      <Footer />
+      {!pageSeule && <Footer />}
     </>
   )
 }

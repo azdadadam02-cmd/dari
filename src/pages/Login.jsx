@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
-// Login "fake" (bla backend): kankhbiw ghir smiya w email f localStorage
+// Login "fake" (bla backend): kankhbiw ghir smiya w email f localStorage.
+// L mot de passe ma kankhbiwh f ta blasa.
 export default function Login({ setUser }) {
   const [nom, setNom] = useState('')
   const [email, setEmail] = useState('')
@@ -14,13 +15,39 @@ export default function Login({ setUser }) {
   }
 
   return (
-    <main className="page-box">
-      <h1>Se connecter</h1>
-      <form className="form" onSubmit={submit}>
-        <input placeholder="Nom" value={nom} onChange={(e) => setNom(e.target.value)} required />
-        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-        <button className="btn-orange">Connexion</button>
-      </form>
-    </main>
+    <div className="login">
+      {/* jiha lowla: tsswira dyal l3a9ar */}
+      <div className="login-image">
+        <Link to="/" className="logo"><span className="logo-house">d</span>ari</Link>
+        <div>
+          <h2>Trouvez la propriété de vos rêves <span className="script">au Maroc.</span></h2>
+          <p>Achetez ou louez en toute confiance avec nos agences partenaires.</p>
+        </div>
+      </div>
+
+      {/* jiha tanya: l formulaire */}
+      <div className="login-form">
+        <Link to="/" className="login-back">← Retour à l'accueil</Link>
+        <form onSubmit={submit}>
+          <h1>Bienvenue</h1>
+          <p className="muted">Connectez-vous pour accéder à votre compte.</p>
+
+          <label>
+            Nom complet
+            <input placeholder="Ex : Adam El Amrani" value={nom} onChange={(e) => setNom(e.target.value)} required />
+          </label>
+          <label>
+            Email
+            <input type="email" placeholder="exemple@email.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          </label>
+          <label>
+            Mot de passe
+            <input type="password" placeholder="••••••••" minLength={6} required />
+          </label>
+
+          <button className="btn-orange">Se connecter</button>
+        </form>
+      </div>
+    </div>
   )
 }

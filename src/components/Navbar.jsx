@@ -16,9 +16,13 @@ export default function Navbar({ user }) {
 
       <div className="nav-right">
         {!user && <Link to="/login">se connecter</Link>}
-        <Link to={user ? '/compte' : '/login'} className="btn-black">
-          {user ? user.nom : 'votre compte'}
-        </Link>
+        {user ? (
+          <Link to="/compte" className="avatar" title={user.nom} aria-label="Mon compte">
+            {user.nom[0].toUpperCase()}
+          </Link>
+        ) : (
+          <Link to="/login" className="btn-black">votre compte</Link>
+        )}
       </div>
     </nav>
   )

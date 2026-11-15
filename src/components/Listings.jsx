@@ -3,56 +3,55 @@ import { useSearchParams } from 'react-router-dom'
 import { CATEGORIES } from '../data'
 import PropertyCard from './PropertyCard'
 
-// Barre dyal les catégories (sticky) + la liste dyal les annonces
-// type: "vente" / "location" / undefined (= kolchi)
+// Barre de recherche (sticky) + la liste dyal les annonces
+// type: "vente" / "location" / undefined (= kolchi, w l'utilisateur ykhtar b les boutons)
 export default function Listings({ properties, type }) {
-  // catégorie w ville f l'URL (?cat=villas&ville=Fès): bach la recherche dyal Home t9der t3mmerhom
+  // les filtres f l'URL (?cat=villas&ville=Fès): bach les carrés w l footer y9dro y3mmrohom
   const [params, setParams] = useSearchParams()
-  const categorie = params.get('cat') || 'tous'
-  const ville = params.get('ville') || '' // "" = toutes les régions
+  const categorie = params.get('cat') || ''
+  const ville = params.get('ville') || ''
+  const typeChoisi = type || params.get('type') || ''
   const [tri, setTri] = useState('') // "" = bla tri, "asc" = croissant, "desc" = décroissant
 
   const changer = (cle, valeur) => {
-    if (valeur && valeur !== 'tous') params.set(cle, valeur)
+    if (valeur) params.set(cle, valeur)
     else params.delete(cle)
     setParams(params, { replace: true })
   }
-  const setCategorie = (c) => changer('cat', c)
-  const setVille = (v) => changer('ville', v)
 
   // la liste dyal les villes kanjibouha mn les annonces (bla tikrar)
   const villes = [...new Set(properties.map((p) => p.ville))]
 
   const resultat = properties
-    .filter((p) => !type || p.type === type)
-    .filter((p) => categorie === 'tous' || p.categorie === categorie)
+    .filter((p) => !typeChoisi || p.type === typeChoisi)
+    .filter((p) => !categorie || p.categorie === categorie)
     .filter((p) => !ville || p.ville === ville)
     .sort((a, b) => (tri === 'asc' ? a.prix - b.prix : tri === 'desc' ? b.prix - a.prix : 0))
 
   return (
     <section id="annonces">
       {/* position: sticky f CSS hiya li katkhalliha tched f lfo9 */}
-      <div className="category-bar">
-        {CATEGORIES.map((c) => (
-          <button
-            key={c}
-            className={c === categorie ? 'active' : ''}
-            onClick={() => setCategorie(c)}
-          >
-            {c}
-          </button>
-        ))}
-      </div>
-
-      <div className="sort">
-        <select value={ville} onChange={(e) => setVille(e.target.value)} aria-label="Filtrer par région">
-          <option value="">Toutes les régions</option>
+      <div className="search">
+        {/* f /acheter w /location l type déjà m3rof, donc ma kanbiynouch had les boutons */}
+        {!type && (
+          <div className="search-type">
+            <button className={typeChoisi === '' ? 'active' : ''} onClick={() => changer('type', '')}>Tous</button>
+            <button className={typeChoisi === 'vente' ? 'active' : ''} onClick={() => changer('type', 'vente')}>Acheter</button>
+            <button className={typeChoisi === 'location' ? 'active' : ''} onClick={() => changer('type', 'location')}>Louer</button>
+          </div>
+        )}
+        <select value={ville} onChange={(e) => changer('ville', e.target.value)} aria-label="Ville">
+          <option value="">Toutes les villes</option>
           {villes.map((v) => <option key={v}>{v}</option>)}
+        </select>
+        <select value={categorie} onChange={(e) => changer('cat', e.target.value)} aria-label="Type de bien">
+          <option value="">Tous les types de bien</option>
+          {CATEGORIES.filter((c) => c !== 'tous').map((c) => <option key={c}>{c}</option>)}
         </select>
         <select value={tri} onChange={(e) => setTri(e.target.value)} aria-label="Trier par prix">
           <option value="">Trier par prix</option>
-          <option value="asc">Prix croissant ↑</option>
-          <option value="desc">Prix décroissant ↓</option>
+          <option value="asc">Prix croissant</option>
+          <option value="desc">Prix décroissant</option>
         </select>
       </div>
 
