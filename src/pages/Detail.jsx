@@ -7,7 +7,7 @@ export default function Detail({ properties }) {
   const p = properties.find((x) => String(x.id) === id)
 
   // bach la page tbda mn lfo9 mlli katclicky 3la carte f west la liste
-  useEffect(() => window.scrollTo(0, 0), [id])
+  useEffect(() => { window.scrollTo(0, 0) }, [id])
 
   if (!p) {
     return (
