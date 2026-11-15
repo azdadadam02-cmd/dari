@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 export default function PropertyCard({ p }) {
   return (
     <Link to={`/bien/${p.id}`} className="card">
-      <img src={p.image} alt={p.titre} />
+      <img src={p.images[0]} alt={p.titre} />
       <span className="badge">{p.type === 'vente' ? 'À vendre' : 'À louer'}</span>
       <div className="card-body">
         <h3>{p.titre}</h3>

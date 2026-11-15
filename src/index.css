@@ -119,8 +119,7 @@ main { padding: 0 5%; flex: 1; }
   z-index: 10;
   background: var(--beige);
   display: flex;
-  justify-content: space-between;
-  gap: 20px;
+  gap: 32px;
   overflow-x: auto;
   padding: 16px 0;
   margin-top: 40px;
@@ -189,10 +188,49 @@ main { padding: 0 5%; flex: 1; }
 
 /* ---------- Page détail ---------- */
 .card { cursor: pointer; }
-.detail { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; padding: 30px 0 60px; }
-.detail img { width: 100%; height: 420px; object-fit: cover; border-radius: 30px; }
-.detail h1 { font-family: 'Raleway', sans-serif; margin-bottom: 10px; }
-.detail .price { font-size: 28px; margin: 16px 0; }
-.detail ul { list-style: none; padding: 0; margin: 20px 0; line-height: 2; }
+.breadcrumb { margin-top: 20px; color: #666; font-size: 14px; }
+.breadcrumb a:hover { color: var(--orange); }
+.detail-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap; margin: 16px 0 24px; }
+.detail-head h1 { font-family: 'Raleway', sans-serif; margin-bottom: 6px; }
+.detail-head .price { font-size: 32px; margin: 0; }
+
+.detail { display: grid; grid-template-columns: 1fr 340px; gap: 32px; align-items: start; padding-bottom: 60px; }
+.detail-photo { position: relative; }
+.detail-photo img { width: 100%; height: 440px; object-fit: cover; border-radius: 20px; display: block; }
+
+/* les 3 tsswirat sghar: katclicky 3la wa7da w katwlli hiya l kbira */
+.thumbs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 12px 0; }
+.thumbs button { padding: 0; border: 3px solid transparent; border-radius: 12px; overflow: hidden; background: none; }
+.thumbs button.active { border-color: var(--orange); }
+.thumbs img { width: 100%; height: 100px; object-fit: cover; display: block; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 28px; }
+.chips span { background: #fff; border-radius: 12px; padding: 10px 16px; font-weight: 500; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+
+.detail-infos { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.detail-infos h2 { font-family: 'Raleway', sans-serif; font-size: 20px; margin-bottom: 12px; }
+.detail-infos p { line-height: 1.6; color: #333; }
+.checks { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.checks li::before { content: '✓'; color: var(--orange); font-weight: 700; margin-right: 8px; }
+
+/* l'carte noire dyal contact: katb9a f blastha mlli kat scrolli */
+.contact { position: sticky; top: 20px; background: #1a1a1a; color: #fff; border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+.contact h2 { text-align: center; font-size: 20px; }
+.agent { display: flex; align-items: center; gap: 12px; }
+.agent p { color: #aaa; font-size: 14px; }
+.avatar { width: 50px; height: 50px; border-radius: 50%; background: var(--orange); display: grid; place-items: center; font-size: 22px; font-weight: 700; }
+.contact-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.contact-btns a { text-align: center; padding: 12px; border-radius: 10px; font-weight: 700; }
+.btn-call { background: #f5b942; color: #000; }
+.btn-wa { background: var(--orange); color: #fff; }
+.contact form { display: flex; flex-direction: column; gap: 10px; }
+.contact input { padding: 12px 14px; border-radius: 10px; border: none; font-family: inherit; font-size: 15px; }
+.contact .btn-orange { font-size: 16px; padding: 12px; border-radius: 10px; }
+.sent { text-align: center; color: #f5b942; }
 .back { display: inline-block; margin-top: 20px; color: var(--orange); }
-@media (max-width: 800px) { .detail { grid-template-columns: 1fr; } }
+
+@media (max-width: 900px) {
+  .detail, .detail-infos { grid-template-columns: 1fr; }
+  .contact { position: static; }
+  .detail-photo img { height: 280px; }
+}

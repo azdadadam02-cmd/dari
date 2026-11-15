@@ -13,7 +13,7 @@ export default function Home({ properties }) {
             de vos rêves <span className="script">au Maroc.</span>
           </h1>
           <p>
-            Que vous souhaitiez acheter, louer ou vendre,<br />
+            Que vous souhaitiez acheter ou louer,<br />
             découvrez les meilleures offres sur notre plateforme
           </p>
           <button className="btn-orange" onClick={scrollToAnnonces}>

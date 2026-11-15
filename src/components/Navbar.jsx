@@ -11,7 +11,6 @@ export default function Navbar({ user }) {
         <NavLink to="/" end>HOME</NavLink>
         <NavLink to="/acheter">ACHETER</NavLink>
         <NavLink to="/location">LOCATION</NavLink>
-        <NavLink to="/vendre">VENDRE</NavLink>
         <NavLink to="/agences">AGENCE IMMOBILIERE</NavLink>
       </div>
 
