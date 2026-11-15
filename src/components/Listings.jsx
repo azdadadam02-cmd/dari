@@ -1,13 +1,24 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { CATEGORIES } from '../data'
 import PropertyCard from './PropertyCard'
 
 // Barre dyal les catégories (sticky) + la liste dyal les annonces
 // type: "vente" / "location" / undefined (= kolchi)
 export default function Listings({ properties, type }) {
-  const [categorie, setCategorie] = useState('tous')
+  // catégorie w ville f l'URL (?cat=villas&ville=Fès): bach la recherche dyal Home t9der t3mmerhom
+  const [params, setParams] = useSearchParams()
+  const categorie = params.get('cat') || 'tous'
+  const ville = params.get('ville') || '' // "" = toutes les régions
   const [tri, setTri] = useState('') // "" = bla tri, "asc" = croissant, "desc" = décroissant
-  const [ville, setVille] = useState('') // "" = toutes les régions
+
+  const changer = (cle, valeur) => {
+    if (valeur && valeur !== 'tous') params.set(cle, valeur)
+    else params.delete(cle)
+    setParams(params, { replace: true })
+  }
+  const setCategorie = (c) => changer('cat', c)
+  const setVille = (v) => changer('ville', v)
 
   // la liste dyal les villes kanjibouha mn les annonces (bla tikrar)
   const villes = [...new Set(properties.map((p) => p.ville))]

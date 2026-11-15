@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import { PROPERTIES, useStorage } from './data'
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 import Home from './pages/Home'
 import Annonces from './pages/Annonces'
 import Agences from './pages/Agences'
@@ -26,7 +27,7 @@ export default function App() {
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/compte" element={<Compte user={user} setUser={setUser} />} />
       </Routes>
-      <footer className="footer">© 2026 dari — Immobilier au Maroc</footer>
+      <Footer />
     </>
   )
 }
