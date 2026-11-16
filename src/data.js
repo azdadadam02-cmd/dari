@@ -94,10 +94,10 @@ export const PROPERTIES = [
 export const VILLES_POPULAIRES = ['Nador', 'Casablanca', 'Marrakech', 'Fès', 'Agadir', 'Tanger']
 
 export const AGENCES = [
-  { nom: 'Atlas Immo', ville: 'Casablanca', tel: '05 22 00 00 01' },
-  { nom: 'Médina Habitat', ville: 'Fès', tel: '05 35 00 00 02' },
-  { nom: 'Ocean Properties', ville: 'Agadir', tel: '05 28 00 00 03' },
-  { nom: 'Red City Homes', ville: 'Marrakech', tel: '05 24 00 00 04' },
+  { nom: 'Atlas Immo', ville: 'Casablanca', tel: '06 03 55 16 53' },
+  { nom: 'Médina Habitat', ville: 'Fès', tel: '07 71 50 85 51' },
+  { nom: 'Ocean Properties', ville: 'Agadir', tel: '06 40 75 75 50' },
+  { nom: 'Red City Homes', ville: 'Marrakech', tel: '06 00 65 63 24' },
   { nom: 'Rif Immobilier', ville: 'Nador', tel: '05 36 00 00 05' },
 ]
 

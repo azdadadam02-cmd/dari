@@ -60,7 +60,7 @@ export default function Agences({ properties }) {
           <h2>{t('ctaTitre')}</h2>
           <p>{t('ctaTexte')}</p>
         </div>
-        <a href="mailto:contact@dari.ma" className="btn-white">{t('nousContacter')}</a>
+        <a href="" className="btn-white">{t('nousContacter')}</a>
       </section>
     </main>
   )
