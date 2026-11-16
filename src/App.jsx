@@ -8,15 +8,15 @@ import Agences from './pages/Agences'
 import Login from './pages/Login'
 import Compte from './pages/Compte'
 import Detail from './pages/Detail'
-import useReveal from './components/useReveal'
+import useMotion from './components/useMotion'
 
 export default function App() {
-  // Les annonces jayin mn data.js, w l'utilisateur mkhbi f localStorage
+
   const properties = PROPERTIES
   const [user, setUser] = useStorage('dari-user', null)
-  useReveal() // animation dyal les sections mlli katscrolly
+  useMotion()
 
-  // page login katban bohdha: bla navbar w footer
+
   const pageSeule = useLocation().pathname === '/login'
 
   return (

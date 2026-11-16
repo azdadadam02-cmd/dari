@@ -16,7 +16,7 @@ export default function Footer() {
           <a href="tel:0603551653" dir="ltr">06 03 55 16 53</a>
           <p>{t('adresse')}</p>
         </div>
-        {/* l'client ybdel l'logha mn hna (katb9a mkhbiya f localStorage) */}
+        
         <div>
           <h4>{t('langue')}</h4>
           <div className="langues">

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useLang } from '../i18n'
 
-// Lcarte kamla lien: mlli katclicky katddik l page dyal détail
+
 export default function PropertyCard({ p }) {
   const { t, mot, titre } = useLang()
 

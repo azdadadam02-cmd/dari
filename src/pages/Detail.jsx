@@ -3,20 +3,19 @@ import { Link, useParams } from 'react-router-dom'
 import { AGENCES } from '../data'
 import { useLang } from '../i18n'
 
-// Page dyal dar wa7da: kanjibo l'id mn l'URL (/bien/3) w kan9elbo 3la l'annonce
+
 export default function Detail({ properties }) {
   const { id } = useParams()
   const { t, mot, titre, description } = useLang()
   const p = properties.find((x) => String(x.id) === id)
-  const [photo, setPhoto] = useState(0) // ina tsswira li katban kbira
-  const [choix, setChoix] = useState(false) // true = nbiyno WhatsApp w Appeler
-  const [zoom, setZoom] = useState(false) // true = tsswira katban b size dyalha
+  const [photo, setPhoto] = useState(0)
+  const [choix, setChoix] = useState(false)
+  const [zoom, setZoom] = useState(false)
 
-  // mlli katbdel l'annonce: nrj3o l lfo9 w l tsswira lowla
-  // 'instant' bach page jdida tbda mn lfo9 direct, bla smooth scroll
+
   useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' }); setPhoto(0); setChoix(false) }, [id])
 
-  // touche Échap katsed l'tsswira lkbira
+
   useEffect(() => {
     const fermer = (e) => e.key === 'Escape' && setZoom(false)
     window.addEventListener('keydown', fermer)
@@ -32,7 +31,7 @@ export default function Detail({ properties }) {
     )
   }
 
-  // l'agence dyal nfs lmdina, ila makantch nakhdo lowla
+
   const agence = AGENCES.find((a) => a.ville === p.ville) || AGENCES[0]
   const whatsapp = 'https://wa.me/212' + agence.tel.replace(/\D/g, '').slice(1)
   const lien = p.type === 'vente' ? '/acheter' : '/location'
@@ -53,12 +52,12 @@ export default function Detail({ properties }) {
         </p>
       </div>
 
-      {/* 1. tsswira principale kbira, w bouton Envoyer fo9ha lte7t 3la liser */}
+      
       <div className="detail-photo">
-        {/* clic 3la tsswira = katban b size dyalha */}
+        
         <img src={p.images[photo]} alt={titre(p)} className="zoomable" onClick={() => setZoom(true)} />
 
-        {/* bouton wa7ed: mlli katclicky 3lih kaytl3 message: WhatsApp ola Appel? */}
+        
         <div className="contact-choix">
           {choix ? (
             <>
@@ -74,7 +73,7 @@ export default function Detail({ properties }) {
         </div>
       </div>
 
-      {/* 2. les photos secondaires */}
+      
       <div className="thumbs">
         {p.images.map((src, i) => (
           <button key={src} className={i === photo ? 'active' : ''} onClick={() => setPhoto(i)}>
@@ -83,7 +82,7 @@ export default function Detail({ properties }) {
         ))}
       </div>
 
-      {/* 3. les détails sghar */}
+      
       <div className="chips">
         {p.chambres > 0 && <span>{p.chambres} {t('chambres')}</span>}
         {p.sdb > 0 && <span>{p.sdb} {t('sdb')}</span>}
@@ -92,7 +91,7 @@ export default function Detail({ properties }) {
         <span>{mot(p.ville)}</span>
       </div>
 
-      {/* 4. trois colonnes: description | caractéristiques | m3lomat dyal lbiya3 */}
+      
       <div className="detail-infos">
         <div>
           <h2>{t('description')}</h2>
@@ -113,7 +112,7 @@ export default function Detail({ properties }) {
         </div>
       </div>
 
-      {/* tsswira b size dyalha fo9 kolchi: clic f ay blasa ola Échap bach tsedha */}
+      
       {zoom && (
         <div className="lightbox" onClick={() => setZoom(false)}>
           <img src={p.images[photo]} alt={titre(p)} />

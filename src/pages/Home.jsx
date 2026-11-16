@@ -3,7 +3,7 @@ import Listings from '../components/Listings'
 import { VILLES_POPULAIRES } from '../data'
 import { useLang } from '../i18n'
 
-// Les 3 blocs dyal "Pourquoi dari" (les clés dyal l'ktaba f i18n.jsx)
+
 const AVANTAGES = ['av1', 'av2', 'av3']
 
 export default function Home({ properties }) {
@@ -12,7 +12,7 @@ export default function Home({ properties }) {
   const scrollToAnnonces = () =>
     document.getElementById('annonces').scrollIntoView({ behavior: 'smooth' })
 
-  // l'annonces dyal kol mdina (bach njibo l'3adad w tsswira)
+
   const villes = VILLES_POPULAIRES.map((nom) => ({
     nom,
     annonces: properties.filter((p) => p.ville === nom),
@@ -20,6 +20,15 @@ export default function Home({ properties }) {
 
   return (
     <main>
+      <video
+        className="page-video"
+        src="/hero.mp4"
+        autoPlay={!window.matchMedia('(prefers-reduced-motion: reduce)').matches}
+        muted
+        loop
+        playsInline
+        aria-hidden="true"
+      />
       <section className="hero-wrap">
         <div className="hero">
           <h1>
@@ -36,15 +45,14 @@ export default function Home({ properties }) {
         </div>
       </section>
 
-      {/* Villes populaires: clic = filtre 3la lmdina f les annonces */}
+      
       <section className="villes">
         <h2>{t('villesTitre')} <span className="script">{t('villesScript')}</span></h2>
-        {/* ster wa7ed li kaydour wa7do. La liste m3awda juj merrat bach l'animation
-            tkon bla ta9ti3: mlli tsali lowla, katbda tanya f nfs l'blasa */}
+        
         <div className="villes-slider">
           <div className="villes-track">
             {[...villes, ...villes].map((v, i) => {
-              const copie = i >= villes.length // l'copie ghir l'animation, lecteur d'écran ma ychoufhach
+              const copie = i >= villes.length
               return (
                 <Link
                   key={i}
@@ -79,7 +87,7 @@ export default function Home({ properties }) {
         </div>
       </section>
 
-      {/* Appel l les agences */}
+      
       <section className="cta-agence">
         <div>
           <h2>{t('ctaTitre')}</h2>

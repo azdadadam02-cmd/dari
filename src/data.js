@@ -1,4 +1,4 @@
-// Kolchi hna: les données dyal site (bla base de données)
+
 import { useState, useEffect } from 'react'
 
 export const CATEGORIES = [
@@ -12,8 +12,7 @@ export const CATEGORIES = [
 
 const img = (id) => `https://images.unsplash.com/photo-${id}?w=1200`
 
-// Les annonces de départ. type = "vente" (Acheter) ola "location" (Location)
-// images[0] hiya tsswira l kbira li katban f la carte
+
 export const PROPERTIES = [
   {
     id: 1, titre: 'Appartement moderne', ville: 'Casablanca', quartier: 'Maârif', prix: 1200000, type: 'vente', categorie: 'appartements', chambres: 3, sdb: 2, surface: 110,
@@ -89,7 +88,7 @@ export const PROPERTIES = [
   },
 ]
 
-// Les villes li kaybano f "Villes populaires" f page Home (Nador hiya lowla)
+
 export const VILLES_POPULAIRES = ['Nador', 'Casablanca', 'Marrakech', 'Fès', 'Agadir', 'Tanger']
 
 export const AGENCES = [
@@ -100,7 +99,7 @@ export const AGENCES = [
   { nom: 'Rif Immobilier', ville: 'Nador', tel: '05 36 00 00 05' },
 ]
 
-// useState li kaykhbi l9ima f localStorage (bach matmchich ila dirti refresh)
+
 export function useStorage(key, initial) {
   const [value, setValue] = useState(() => {
     try {
@@ -111,7 +110,7 @@ export function useStorage(key, initial) {
     }
   })
   useEffect(() => {
-    try { localStorage.setItem(key, JSON.stringify(value)) } catch { /* storage bloqué: n9ado bla bih */ }
+    try { localStorage.setItem(key, JSON.stringify(value)) } catch {}
   }, [key, value])
   return [value, setValue]
 }

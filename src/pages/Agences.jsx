@@ -5,20 +5,20 @@ import { useLang } from '../i18n'
 
 export default function Agences({ properties }) {
   const { t, mot, nbAnnonces } = useLang()
-  const [ville, setVille] = useState('') // "" = toutes les villes
+  const [ville, setVille] = useState('')
 
   const villes = [...new Set(AGENCES.map((a) => a.ville))]
   const liste = AGENCES.filter((a) => !ville || a.ville === ville)
 
   return (
     <main>
-      {/* l'entête: bhal l'hero dyal Home walakin sghir */}
+      
       <section className="agences-head">
         <h1>{t('agTitre')} <span className="script">{t('agScript')}</span></h1>
         <p>{t('agTexte')}</p>
       </section>
 
-      {/* filtre b lmdina */}
+      
       <div className="agences-filtre">
         <button className={ville === '' ? 'active' : ''} onClick={() => setVille('')}>{t('toutes')}</button>
         {villes.map((v) => (
@@ -28,7 +28,7 @@ export default function Agences({ properties }) {
 
       <div className="agences-grid">
         {liste.map((a) => {
-          // ch7al mn annonce kayna f lmdina dyal l'agence
+
           const nb = properties.filter((p) => p.ville === a.ville).length
           const tel = a.tel.replace(/\s/g, '')
           return (
@@ -54,7 +54,7 @@ export default function Agences({ properties }) {
         })}
       </div>
 
-      {/* nfs l'bloc dyal Home */}
+      
       <section className="cta-agence">
         <div>
           <h2>{t('ctaTitre')}</h2>

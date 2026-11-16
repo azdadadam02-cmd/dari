@@ -1,53 +1,53 @@
-// Les langues dyal site: français (fr) w l3rbiya (ar).
-// Kol ktaba f site katji mn hna: t('cle') katrje3 l'ktaba b l'logha li khtar l'client.
+
+
 import { createContext, useContext, useEffect } from 'react'
 import { useStorage } from './data'
 
 const TEXTES = {
   fr: {
-    // navbar
+
     navHome: 'HOME', navAcheter: 'ACHETER', navLocation: 'LOCATION', navAgences: 'AGENCE IMMOBILIERE',
     seConnecter: 'se connecter', votreCompte: 'votre compte', monCompte: 'Mon compte',
-    // hero
+
     heroTitre1: 'Trouvez la propriété', heroTitre2: 'de vos rêves', heroScript: 'au Maroc.',
     heroTexte1: 'Que vous souhaitiez acheter ou louer,', heroTexte2: 'découvrez les meilleures offres sur notre plateforme',
     heroBouton: 'naviguer maintenant',
-    // villes populaires
+
     villesTitre: 'Villes', villesScript: 'populaires',
-    // recherche
+
     tous: 'Tous', acheter: 'Acheter', louer: 'Louer', ville: 'Ville', toutesVilles: 'Toutes les villes',
     typeBien: 'Type de bien', tousTypes: 'Tous les types de bien',
     trier: 'Trier par prix', prixCroissant: 'Prix croissant', prixDecroissant: 'Prix décroissant',
     aucune: 'Aucune annonce trouvée.',
-    // carte
+
     ch: 'ch', dh: 'DH', parMois: ' / mois',
-    // pourquoi dari
+
     pourquoi: 'Pourquoi choisir', pourquoiScript: 'dari ?',
     av1Titre: 'Des annonces vérifiées', av1Texte: "Chaque bien est contrôlé par nos agences partenaires avant d'être publié.",
     av2Titre: 'Partout au Maroc', av2Texte: 'De Tanger à Agadir, trouvez un bien dans la ville et le quartier qui vous conviennent.',
     av3Titre: 'Un contact direct', av3Texte: "Appelez ou écrivez à l'agence en un clic, sans intermédiaire.",
-    // bloc agences
+
     ctaTitre: 'Vous êtes une agence immobilière ?',
     ctaTexte: "Rejoignez dari et présentez vos biens à des milliers d'acheteurs et de locataires partout au Maroc.",
     devenirPartenaire: 'Devenir partenaire', nousContacter: 'Nous contacter',
-    // pages annonces
+
     titreAcheter: 'Acheter un bien', titreLouer: 'Louer un bien',
-    // page détail
+
     introuvable: 'Annonce introuvable', retourAccueil: "Retour à l'accueil", accueil: 'Accueil', sep: '›', virgule: ',',
     question: "Comment voulez-vous contacter l'annonceur ?", appel: 'Appel', envoyer: 'Envoyer', photo: 'Photo',
     chambres: 'Chambres', sdb: 'Salles de bain', description: 'Description', caracteristiques: 'Caractéristiques',
     annonceur: 'Annonceur', nom: 'Nom :', type: 'Type :', villeDeux: 'Ville :', telephone: 'Téléphone :',
     agenceImmo: 'Agence immobilière', fermer: 'Fermer',
-    // page agences
+
     agTitre: 'Nos agences', agScript: 'partenaires',
     agTexte: 'Des professionnels de confiance partout au Maroc pour vous accompagner dans votre projet.',
     toutes: 'Toutes', tel: 'Tél.', a: 'à', voirAnnonces: 'Voir les annonces',
-    // login + compte
+
     loginTexte: 'Achetez ou louez en toute confiance avec nos agences partenaires.',
     bienvenue: 'Bienvenue', loginSous: 'Connectez-vous pour accéder à votre compte.',
     nomComplet: 'Nom complet', nomExemple: 'Ex : Adam El Amrani', email: 'Email', motDePasse: 'Mot de passe',
     boutonConnecter: 'Se connecter', deconnexion: 'Déconnexion',
-    // footer
+
     footerTexte: 'Votre plateforme pour acheter ou louer un bien immobilier au Maroc.',
     contact: 'Contact', adresse: 'Nador, Maroc', copyright: '© 2026 dari — Immobilier au Maroc', langue: 'Langue',
   },
@@ -88,7 +88,7 @@ const TEXTES = {
   },
 }
 
-// Les mots li jayin mn les données (mdon, catégories, mmayzat, l7wma) b l3rbiya
+
 const MOTS_AR = {
   Casablanca: 'الدار البيضاء', Marrakech: 'مراكش', Rabat: 'الرباط', 'Fès': 'فاس', Tanger: 'طنجة',
   Chefchaouen: 'شفشاون', Agadir: 'أكادير', 'Kénitra': 'القنيطرة', Nador: 'الناظور',
@@ -103,7 +103,7 @@ const MOTS_AR = {
   Centre: 'وسط المدينة', Gauthier: 'غوتيي', Founty: 'فونتي', 'Bir Rami': 'بئر الرامي', Marchica: 'مارتشيكا',
 }
 
-// L'3onwan w l'wasf dyal kol annonce b l3rbiya (b l'id dyalha)
+
 const ANNONCES_AR = {
   1: { titre: 'شقة عصرية', description: 'شقة جميلة ومضيئة في الطابق الثالث من إقامة حديثة، قريبة من المتاجر والمدارس. صالون واسع، مطبخ مجهز وشرفة كبيرة.' },
   2: { titre: 'فيلا بمسبح', description: 'فيلا راقية في قلب النخيل، محاطة بحديقة كبيرة مع مسبح خاص. مثالية للعائلة أو لمشروع دار ضيافة.' },
@@ -122,9 +122,9 @@ const ANNONCES_AR = {
 const LangContext = createContext(null)
 
 export function LangProvider({ children }) {
-  const [lang, setLang] = useStorage('dari-lang', 'fr') // l'logha katb9a mkhbiya mlli ydir refresh
+  const [lang, setLang] = useStorage('dari-lang', 'fr')
 
-  // l3rbiya katktab mn limen l liser (rtl)
+
   useEffect(() => {
     document.documentElement.lang = lang
     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr'
@@ -139,11 +139,11 @@ export function useLang() {
   return {
     lang,
     setLang,
-    t: (cle) => TEXTES[lang][cle] ?? TEXTES.fr[cle], // ila ma l9inahach b l3rbiya, nrj3o l'français
-    mot: (m) => (ar && MOTS_AR[m]) || m, // mdina, catégorie, mmayza...
+    t: (cle) => TEXTES[lang][cle] ?? TEXTES.fr[cle],
+    mot: (m) => (ar && MOTS_AR[m]) || m,
     titre: (p) => (ar && ANNONCES_AR[p.id]?.titre) || p.titre,
     description: (p) => (ar && ANNONCES_AR[p.id]?.description) || p.description,
-    // "1 annonce / 2 annonces" — l3rbiya 3ndha jam3 mkhtalef 3la 7sab l3adad
+
     nbAnnonces: (n) => ar
       ? (n === 1 ? 'إعلان واحد' : n === 2 ? 'إعلانان' : n <= 10 ? `${n} إعلانات` : `${n} إعلان`)
       : `${n} annonce${n > 1 ? 's' : ''}`,

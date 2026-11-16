@@ -19,7 +19,7 @@ export default function Navbar({ user }) {
       <div className="nav-right">
         {!user && <Link to="/login">{t('seConnecter')}</Link>}
         {user ? (
-          // pill k7la: dwira fiha l7arf lowel + l'email
+
           <Link to="/compte" className="profile-pill" title={user.nom} aria-label={t('monCompte')}>
             <span className="avatar">{user.nom[0].toUpperCase()}</span>
             <span className="profile-email">{user.email}</span>
