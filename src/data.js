@@ -1,7 +1,6 @@
 // Kolchi hna: les données dyal site (bla base de données)
 import { useState, useEffect } from 'react'
 
-// Les catégories li kayban f la barre li katched f lfo9 (sticky)
 export const CATEGORIES = [
   'tous',
   'appartements',
@@ -10,7 +9,7 @@ export const CATEGORIES = [
   'terrains',
 ]
 
-// tsswira mn Unsplash b l'id dyalha
+
 const img = (id) => `https://images.unsplash.com/photo-${id}?w=1200`
 
 // Les annonces de départ. type = "vente" (Acheter) ola "location" (Location)
