@@ -75,13 +75,29 @@ export const PROPERTIES = [
     caracteristiques: ['Patio', 'Piscine', 'Terrasse', 'Meublé', 'Climatisation'],
     images: [img('1590073242678-70ee3fc28e8e'), img('1618221195710-dd6b41faaea6'), img('1600047509807-ba8f99d2cdde')],
   },
+  {
+    id: 11, titre: 'Villa vue sur la lagune', ville: 'Nador', quartier: 'Marchica', prix: 3800000, type: 'vente', categorie: 'villas', chambres: 4, sdb: 3, surface: 320,
+    description: "Villa moderne face à la lagune de Marchica, avec grande terrasse, jardin et accès rapide à la corniche.",
+    caracteristiques: ['Vue mer', 'Jardin', 'Terrasse', 'Garage', 'Climatisation'],
+    images: [img('1600607687939-ce8a6c25118c'), img('1600566753190-17f0baa2a6c3'), img('1600210492486-724fe5c67fb0')],
+  },
+  {
+    id: 12, titre: 'Appartement centre-ville', ville: 'Nador', quartier: 'Centre', prix: 3500, type: 'location', categorie: 'appartements', chambres: 2, sdb: 1, surface: 85,
+    description: "Appartement meublé en plein centre de Nador, proche du boulevard et des commerces. Idéal pour un couple ou un étudiant.",
+    caracteristiques: ['Meublé', 'Ascenseur', 'Balcon', 'Cuisine équipée'],
+    images: [img('1484154218962-a197022b5858'), img('1505691938895-1758d7feb511'), img('1556911220-bff31c812dba')],
+  },
 ]
+
+// Les villes li kaybano f "Villes populaires" f page Home (Nador hiya lowla)
+export const VILLES_POPULAIRES = ['Nador', 'Casablanca', 'Marrakech', 'Fès', 'Agadir', 'Tanger']
 
 export const AGENCES = [
   { nom: 'Atlas Immo', ville: 'Casablanca', tel: '05 22 00 00 01' },
   { nom: 'Médina Habitat', ville: 'Fès', tel: '05 35 00 00 02' },
   { nom: 'Ocean Properties', ville: 'Agadir', tel: '05 28 00 00 03' },
   { nom: 'Red City Homes', ville: 'Marrakech', tel: '05 24 00 00 04' },
+  { nom: 'Rif Immobilier', ville: 'Nador', tel: '05 36 00 00 05' },
 ]
 
 // useState li kaykhbi l9ima f localStorage (bach matmchich ila dirti refresh)

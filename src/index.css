@@ -2,67 +2,97 @@
   --beige: #f1e9da;
   --orange: #ff7a1a;
   --black: #000;
+  --gris: #555;      /* ktaba tanawiya */
+
+  /* tailles dyal l'ktaba (bhal sarouty.ma) */
+  --fs-h1: 36px;     /* 3onwan kbir */
+  --fs-h2: 26px;     /* 3onwan dyal section */
+  --fs-h3: 18px;     /* 3onwan dyal carte */
+  --fs-body: 15px;   /* ktaba 3adiya */
+  --fs-small: 13px;  /* ktaba sghira */
+
+  /* espaces */
+  --container: 1270px;  /* l3ard dyal l'contenu */
+  --section: 64px;      /* l'espace bin les sections */
+  --radius: 12px;       /* les coins dyal les cartes */
 }
+
+/* Règle 60-30-10: 60% beige (fond), 30% noir/blanc (ktaba, cartes), 10% orange (GHIR les boutons principaux) */
 
 * { box-sizing: border-box; margin: 0; }
 
 body {
   background: var(--beige);
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  font-size: var(--fs-body);
   color: var(--black);
+  line-height: 1.5;
 }
+
+h1, h2, h3, h4 { line-height: 1.25; font-weight: 600; }
+h3 { font-size: var(--fs-h3); }
 
 a { color: inherit; text-decoration: none; }
 button { font-family: inherit; cursor: pointer; }
-main { padding: 0 5%; flex: 1; }
+/* l'contenu ma ytfeyrrech 3la les écrans kbar: max 1270px f lwast (+24px f kol jiha) */
+main { width: 100%; max-width: calc(var(--container) + 48px); margin: 0 auto; padding: 0 24px; flex: 1; }
+
+/* scroll smooth f site kaml (ila l'utilisateur ma 7abesch les animations) */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+/* animation: katbān mlli katwsal liha (l'class .reveal katzado useReveal.js) */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
 
 /* footer dima f taht: #root kay3mmer l'écran kamel, w main kaykhod lblasa li bqat */
 #root { min-height: 100vh; display: flex; flex-direction: column; }
 
-/* ---------- Top bar + Navbar ---------- */
-.topbar {
-  background: var(--black);
-  color: #fff;
-  text-align: center;
-  padding: 6px;
-  font-size: 18px;
-}
+/* ---------- Navbar ---------- */
 
 .navbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 28px 5%;
+  justify-content: flex-start;
+  padding: 24px max(24px, calc((100% - var(--container)) / 2)); /* nfs l3ard dyal main */
   gap: 20px;
   flex-wrap: wrap;
 }
 
 /* logo SVG: dar w "ari" b couleur dyal text, "d" b couleur l3aks */
 .logo { display: inline-block; color: var(--black); }
-.logo svg { display: block; height: 48px; width: auto; }
+/* "dari" w les liens 3la nfs ster (baseline) */
+.logo, .nav-links { align-self: baseline; }
+.logo svg { display: block; height: 36px; width: auto; direction: ltr; } /* l'logo dima ltr 7ta f l3rbiya */
 .logo-dar, .logo-ari { fill: currentColor; }
+.logo text { font-family: 'DM Sans', sans-serif; } /* l'logo mrsoum 3la had l'police: "d" kaydkhol f dar */
 .logo-d { fill: #fff; }
 
-.nav-links { display: flex; gap: 32px; flex-wrap: wrap; }
-.nav-links a { font-weight: 700; font-size: 15px; }
-.nav-links a.active { color: var(--orange); }
+.nav-links { display: flex; gap: 32px; flex-wrap: wrap; margin-inline-start: 40px; } /* l7da logo, machi f lwast */
+.nav-links a { font-weight: 500; font-size: 15px; }
+.nav-links a.active { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px; }
 
-.nav-right { display: flex; align-items: center; gap: 12px; }
+.nav-right { display: flex; align-items: center; gap: 12px; margin-inline-start: auto; } /* kaydfe3ha l'akhir dyal l'ster */
 
 .btn-black, .btn-orange {
   display: inline-block;
   border: none;
   border-radius: 999px;
-  padding: 10px 22px;
-  font-size: 16px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
 }
 .btn-black { background: var(--black); color: #fff; }
-.btn-orange { background: var(--orange); color: #fff; font-weight: 700; font-size: 20px; padding: 14px 40px; }
+.btn-orange { background: var(--orange); color: #fff; font-size: var(--fs-body); padding: 12px 24px; }
 
 /* ---------- Hero ---------- */
 .hero-wrap {
   position: relative;
   margin-top: 20px;
+  /* l'hero kaykhrej mn l'1200px dyal main w kayrje3 l size l9dim: l3ard dyal l'écran - 5% f kol jiha */
+  width: 90vw;
+  margin-inline: calc(50% - 45vw); /* f juj jihat bach ykhdem 7ta f rtl */
 }
 /* l'bordure orange li mor tsswira */
 .hero-wrap::before {
@@ -91,80 +121,72 @@ main { padding: 0 5%; flex: 1; }
   z-index: -1;
   border-radius: 40px;
   background:
-    linear-gradient(90deg, rgba(255,255,255,.55), rgba(255,255,255,0) 60%),
+    /* dl byed f jiha liser: 9wi 7ta ~50% (fin katsali l'ktaba), w mn b3d kayghber b chwiya */
+    linear-gradient(90deg, rgba(255,255,255,.8) 0%, rgba(255,255,255,.7) 45%, rgba(255,255,255,0) 72%),
     url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1600') center / cover;
   filter: grayscale(1);
 }
 
 .hero h1 {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Raleway', sans-serif; /* l'hero b9a bhal l'design l'asli */
   font-size: clamp(32px, 5vw, 64px);
+  font-weight: 700;
   line-height: 1.3;
 }
 .script {
   font-family: 'Great Vibes', cursive;
   font-weight: 400;
-  color: var(--orange);
 }
+.hero .script { color: var(--orange); } /* ghir f l'hero, bhal l'design l'asli */
 .hero p { font-size: clamp(16px, 1.6vw, 24px); margin: 40px 0 60px; }
+.hero .btn-orange { font-size: 20px; font-weight: 700; padding: 14px 40px; }
 
 /* ---------- Cartes ---------- */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 24px;
-  padding: 20px 0 60px;
+  gap: 20px;
+  padding-top: 24px;
 }
 .card {
   position: relative;
   background: #fff;
-  border-radius: 20px;
+  border-radius: var(--radius);
   overflow: hidden;
   box-shadow: 0 4px 14px rgba(0,0,0,.08);
 }
 .card img { width: 100%; height: 200px; object-fit: cover; display: block; }
-.card-body { padding: 16px; }
-.card h3 { margin-bottom: 6px; }
-.badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  background: var(--orange);
-  color: #fff;
-  padding: 4px 12px;
-  border-radius: 999px;
-  font-size: 13px;
-}
-.muted { color: #666; margin-bottom: 4px; }
-.price { color: var(--orange); font-weight: 700; font-size: 18px; margin-top: 8px; }
+.card-body { padding: 16px; display: flex; flex-direction: column; gap: 4px; }
+.muted { color: var(--gris); font-size: 14px; }
+.price { font-weight: 700; font-size: 16px; margin-top: 8px; }
 .empty { text-align: center; padding: 40px; color: #666; }
 
 /* ---------- Pages simples ---------- */
-.page-title { font-family: 'Raleway', sans-serif; margin: 20px 0; }
+.page-title { font-size: var(--fs-h2); margin: 32px 0 24px; }
 .page-box { max-width: 520px; margin: 30px auto; }
-.page-box h1 { font-family: 'Raleway', sans-serif; margin-bottom: 20px; }
-.page-box a:not(.btn-orange) { color: var(--orange); }
+.page-box h1 { font-size: var(--fs-h2); margin-bottom: 24px; }
+.page-box a:not(.btn-orange):not(.btn-black) { text-decoration: underline; }
 
 .form { display: flex; flex-direction: column; gap: 12px; }
 .form input, .form select {
   padding: 12px 16px;
   border: 1px solid #ccc;
   border-radius: 12px;
-  font-size: 16px;
+  font-size: var(--fs-body);
   font-family: inherit;
 }
 .form .btn-orange { margin-top: 8px; }
 
 /* ---------- Footer ---------- */
-.footer { background: var(--black); color: #fff; padding: 50px 5% 20px; }
-.footer-cols { display: grid; grid-template-columns: 1fr auto; gap: 30px; }
+.footer { background: var(--black); color: #fff; padding: 48px max(24px, calc((100% - var(--container)) / 2)) 20px; }
+.footer-cols { display: grid; grid-template-columns: 1fr auto auto; gap: 48px; }
 .footer-cols > div { display: flex; flex-direction: column; gap: 8px; }
-.footer h4 { color: var(--orange); margin-bottom: 6px; }
-.footer a:hover { color: var(--orange); }
-.footer p { color: #bbb; }
+.footer h4 { margin-bottom: 8px; }
+.footer a:hover { text-decoration: underline; }
+.footer p { color: #bbb; font-size: 14px; }
 .footer .logo, .login-image .logo { color: #fff; }
 .footer .logo-d, .login-image .logo-d { fill: var(--black); }
-.footer-bottom { text-align: center; border-top: 1px solid #333; margin-top: 30px; padding-top: 20px; }
+.footer-bottom { font-size: var(--fs-small); text-align: center; border-top: 1px solid #333; margin-top: 30px; padding-top: 20px; }
 
 /* ---------- Barre de recherche (STICKY) ---------- */
 .search {
@@ -177,70 +199,97 @@ main { padding: 0 5%; flex: 1; }
   gap: 12px;
   background: #fff;
   padding: 14px;
-  border-radius: 24px;
-  margin-top: 40px;
+  border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0,0,0,.12);
 }
 .search-type { display: flex; background: var(--beige); border-radius: 999px; padding: 4px; }
-.search-type button { border: none; background: none; padding: 10px 18px; border-radius: 999px; font-size: 15px; font-weight: 700; }
+.search-type button { border: none; background: none; padding: 10px 16px; border-radius: 999px; font-size: 14px; font-weight: 500; }
 .search-type button.active { background: var(--black); color: #fff; }
-.search select { flex: 1; min-width: 150px; padding: 12px 14px; border: 1px solid #ddd; border-radius: 12px; font-family: inherit; font-size: 15px; background: #fff; }
+.search select { flex: 1; min-width: 150px; padding: 12px 14px; border: 1px solid #ddd; border-radius: 12px; font-family: inherit; font-size: 14px; background: #fff; }
 
 /* ---------- Pourquoi dari ---------- */
-.avantages { padding: 20px 0 70px; }
-.avantages h2 { font-family: 'Raleway', sans-serif; font-size: clamp(26px, 3vw, 40px); margin-bottom: 30px; }
+/* l'espace bin les sections dyal Home */
+#annonces { padding-top: var(--section); }
+.avantages { padding-top: var(--section); }
+.avantages h2 { font-size: var(--fs-h2); margin-bottom: 24px; }
 .avantages > div { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
-.avantages article { background: #fff; border-radius: 20px; padding: 28px; }
-.avantages .num { color: var(--orange); font-weight: 700; font-size: 28px; }
-.avantages h3 { margin: 10px 0 8px; }
-.avantages p { color: #555; line-height: 1.6; }
+.avantages article { background: #fff; border-radius: var(--radius); padding: 24px; }
+.avantages .num { color: var(--gris); font-weight: 600; font-size: var(--fs-h2); }
+.avantages h3 { margin: 12px 0 8px; }
+.avantages p { color: var(--gris); line-height: 1.6; }
 
 /* ---------- Page détail ---------- */
 .card { cursor: pointer; }
-.breadcrumb { margin-top: 20px; color: #666; font-size: 14px; }
-.breadcrumb a:hover { color: var(--orange); }
+.breadcrumb { margin-top: 24px; color: var(--gris); font-size: var(--fs-small); }
+.breadcrumb a:hover { text-decoration: underline; }
 .detail-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap; margin: 16px 0 24px; }
-.detail-head h1 { font-family: 'Raleway', sans-serif; margin-bottom: 6px; }
-.detail-head .price { font-size: 32px; margin: 0; }
+.detail-head h1 { font-size: var(--fs-h2); margin-bottom: 8px; }
+.detail-head .price { font-size: var(--fs-h2); margin: 0; }
 
-.detail { display: grid; grid-template-columns: 1fr 340px; gap: 32px; align-items: start; padding-bottom: 60px; }
+/* tsswira principale b l3ard kaml, w Envoyer fo9ha lte7t 3la liser */
 .detail-photo { position: relative; }
-.detail-photo img { width: 100%; height: 440px; object-fit: cover; border-radius: 20px; display: block; }
+.detail-photo img { width: 100%; height: 360px; object-fit: cover; border-radius: var(--radius); display: block; }
+.contact-choix {
+  position: absolute; inset-inline-start: 24px; bottom: 24px;
+  background: #fff; border-radius: 14px; padding: 14px; max-width: 320px;
+}
+.contact-choix:has(> .btn-orange) { background: none; padding: 0; } /* 9bel clic: ghir l'bouton */
+.contact-choix .btn-orange { padding: 12px 32px; }
+.contact-choix p { margin-bottom: 12px; font-weight: 500; font-size: 14px; }
 
 /* les 3 tsswirat sghar: katclicky 3la wa7da w katwlli hiya l kbira */
 .thumbs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 12px 0; }
 .thumbs button { padding: 0; border: 3px solid transparent; border-radius: 12px; overflow: hidden; background: none; }
-.thumbs button.active { border-color: var(--orange); }
-.thumbs img { width: 100%; height: 100px; object-fit: cover; display: block; }
+.thumbs button.active { border-color: var(--black); }
+.thumbs img { width: 100%; height: 80px; object-fit: cover; display: block; }
 
-.chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 28px; }
-.chips span { background: #fff; border-radius: 12px; padding: 10px 16px; font-weight: 500; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+.chips { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 16px 0 48px; }
+.chips span { background: #fff; border-radius: var(--radius); padding: 12px 16px; font-weight: 600; font-size: 14px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
 
-.detail-infos { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
-.detail-infos h2 { font-family: 'Raleway', sans-serif; font-size: 20px; margin-bottom: 12px; }
+/* 3 colonnes b khat bin kol wa7da */
+.detail-infos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; padding-bottom: var(--section); }
+.detail-infos > div + div { border-inline-start: 2px solid #ccc; padding-inline-start: 32px; }
+.detail-infos h2 { font-size: var(--fs-h3); margin-bottom: 12px; }
 .detail-infos p { line-height: 1.6; color: #333; }
+.detail-infos p + p { margin-top: 8px; }
 .checks { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.checks li::before { content: '✓'; color: var(--orange); font-weight: 700; margin-right: 8px; }
+/* point k7el sghir blast l'emoji */
+.checks li::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--black); margin-inline-end: 10px; vertical-align: middle; }
 
-/* l'carte noire dyal contact: katb9a f blastha mlli kat scrolli */
-.contact { position: sticky; top: 20px; background: #1a1a1a; color: #fff; border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 16px; }
-.contact h2 { text-align: center; font-size: 20px; }
-.agent { display: flex; align-items: center; gap: 12px; }
-.agent p { color: #aaa; font-size: 14px; }
-.avatar { color: #fff; flex-shrink: 0; width: 50px; height: 50px; border-radius: 50%; background: var(--orange); display: grid; place-items: center; font-size: 22px; font-weight: 700; }
+.avatar { color: #fff; flex-shrink: 0; width: 50px; height: 50px; border-radius: 50%; background: var(--black); display: grid; place-items: center; font-size: 22px; font-weight: 700; }
+/* Bouton profil f navbar */
+.profile-pill {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--black); color: #fff;
+  border-radius: 999px; padding: 3px; padding-inline-end: 16px;
+  max-width: 220px;
+}
+.profile-pill .avatar { width: 32px; height: 32px; font-size: 15px; background: #fff; color: var(--black); }
+.profile-email {
+  font-weight: 700; font-size: 13px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; /* email twil kaytqte3 b ... */
+}
 .contact-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.contact-btns a { text-align: center; padding: 12px; border-radius: 10px; font-weight: 700; }
-.btn-call { background: #f5b942; color: #000; }
-.btn-wa { background: var(--orange); color: #fff; }
-.contact form { display: flex; flex-direction: column; gap: 10px; }
-.contact input { padding: 12px 14px; border-radius: 10px; border: none; font-family: inherit; font-size: 15px; }
-.contact .btn-orange { font-size: 16px; padding: 12px; border-radius: 10px; }
-.sent { text-align: center; color: #f5b942; }
-.back { display: inline-block; margin-top: 20px; color: var(--orange); }
+.contact-btns a { text-align: center; padding: 10px 16px; border-radius: 999px; font-size: 14px; font-weight: 600; border: 2px solid var(--black); }
+.contact-btns a:hover { background: var(--black); color: #fff; }
+/* tsswira b size dyalha (lightbox) */
+.zoomable { cursor: zoom-in; }
+.lightbox {
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(0,0,0,.85);
+  display: grid; place-items: center;
+  cursor: zoom-out;
+}
+.lightbox img { max-width: 90vw; max-height: 90vh; border-radius: 12px; } /* size dyalha, bla ma tfout l'écran */
+.lightbox-close {
+  position: absolute; top: 20px; right: 24px;
+  background: none; border: 2px solid #fff; border-radius: 999px; color: #fff; font-size: 15px; padding: 8px 18px;
+}
+.back { display: inline-block; margin-top: 20px; text-decoration: underline; }
 
 @media (max-width: 900px) {
-  .detail, .detail-infos { grid-template-columns: 1fr; }
-  .contact { position: static; }
+  .detail-infos { grid-template-columns: 1fr; }
+  .detail-infos > div + div { border-inline-start: none; padding-inline-start: 0; }
   .detail-photo img { height: 280px; }
 }
 
@@ -259,19 +308,111 @@ main { padding: 0 5%; flex: 1; }
     linear-gradient(to top, rgba(0,0,0,.75), rgba(0,0,0,.1)),
     url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1400') center / cover;
 }
-.login-image h2 { font-family: 'Raleway', sans-serif; font-size: clamp(28px, 3vw, 44px); line-height: 1.3; margin-bottom: 12px; }
-.login-image p { font-size: 18px; color: #eee; }
+.login-image h2 { font-size: var(--fs-h1); margin-bottom: 16px; }
+.login-image p { font-size: 16px; color: #eee; }
 
 .login-form { display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px 5%; position: relative; }
-.login-back { position: absolute; top: 30px; right: 5%; color: var(--orange); }
+.login-back { position: absolute; top: 30px; inset-inline-end: 5%; text-decoration: underline; }
 .login-form form { width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 18px; }
-.login-form h1 { font-family: 'Raleway', sans-serif; font-size: 36px; }
+.login-form h1 { font-size: var(--fs-h2); }
 .login-form label { display: flex; flex-direction: column; gap: 6px; font-weight: 500; }
-.login-form input { padding: 14px 16px; border: 1px solid #ccc; border-radius: 12px; font-size: 16px; font-family: inherit; background: #fff; }
-.login-form input:focus { outline: 2px solid var(--orange); border-color: transparent; }
-.login-form .btn-orange { margin-top: 8px; font-size: 17px; border-radius: 12px; }
+.login-form input { padding: 14px 16px; border: 1px solid #ccc; border-radius: 12px; font-size: var(--fs-body); font-family: inherit; background: #fff; }
+.login-form input:focus { outline: 2px solid var(--black); border-color: transparent; }
+.login-form .btn-orange { margin-top: 8px; }
 
 @media (max-width: 800px) {
   .login { grid-template-columns: 1fr; }
   .login-image { min-height: 240px; }
 }
+
+/* ---------- Home: villes populaires ---------- */
+.villes { padding-top: var(--section); }
+.villes h2 { font-size: var(--fs-h2); margin-bottom: 24px; }
+/* ster wa7ed li kaydour wa7do (bhal tapis roulant) */
+.villes-slider {
+  overflow: hidden;
+  /* les bords kayghberu b chwiya bach l'animation tban zwina */
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+.villes-track {
+  display: flex;
+  width: max-content;
+  animation: defiler 30s linear infinite;
+}
+/* mlli kaddouz b souris fo9 chi mdina, kaytw9ef bach t9der tclicky */
+.villes-slider:hover .villes-track { animation-play-state: paused; }
+/* -50% = toul dyal la liste lowla: mlli toussal, l'copie katkon f nfs l'blasa */
+@keyframes defiler { to { transform: translateX(-50%); } }
+.villes-track .ville { width: 280px; flex-shrink: 0; margin-right: 16px; } /* margin blast gap bach -50% ykon m9ad */
+/* ila l'utilisateur ma bghach animations: scroll b lyed */
+@media (prefers-reduced-motion: reduce) {
+  .villes-track { animation: none; }
+  .villes-slider { overflow-x: auto; mask-image: none; }
+}
+.ville {
+  position: relative; min-height: 180px; border-radius: var(--radius); overflow: hidden;
+  display: flex; flex-direction: column; justify-content: flex-end; padding: 20px;
+  color: #fff; background: #333 center / cover;
+}
+/* dl lte7t bach l'ktaba tban */
+.ville::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.7), transparent 60%); }
+.ville > * { position: relative; }
+.ville h3 { font-size: var(--fs-h3); margin-bottom: 4px; }
+.ville span { font-size: var(--fs-small); }
+.ville:hover { outline: 3px solid var(--black); }
+
+/* ---------- Home: appel l les agences ---------- */
+.cta-agence {
+  display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+  background: var(--black); color: #fff; border-radius: 16px; padding: 40px; margin: var(--section) 0;
+}
+.cta-agence h2 { font-size: var(--fs-h2); margin-bottom: 12px; }
+.cta-agence p { color: #ccc; max-width: 560px; }
+.btn-white { display: inline-block; background: #fff; color: var(--black); border-radius: 999px; padding: 12px 20px; font-size: 14px; font-weight: 600; }
+
+
+/* ---------- Page Agences ---------- */
+.agences-head {
+  margin-top: 16px; border-radius: 16px; padding: 48px 40px; color: #fff;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.7), rgba(0,0,0,.2)),
+    url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600') center / cover;
+}
+.agences-head h1 { font-size: var(--fs-h1); margin-bottom: 16px; }
+.agences-head p { font-size: 16px; max-width: 520px; }
+
+.agences-filtre { display: flex; flex-wrap: wrap; gap: 10px; margin: 32px 0 24px; }
+.agences-filtre button { border: 1px solid var(--black); background: none; border-radius: 999px; padding: 10px 16px; font-size: 14px; font-weight: 500; }
+.agences-filtre button.active { background: var(--black); color: #fff; }
+
+.agences-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+.agence { background: #fff; border-radius: var(--radius); padding: 24px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 4px 14px rgba(0,0,0,.08); }
+.agence-top { display: flex; align-items: center; gap: 14px; }
+.agence-top h3 { margin-bottom: 4px; }
+.agence-nb { background: var(--beige); border-radius: 8px; padding: 10px 14px; font-size: 14px; }
+.agence-nb strong { font-size: var(--fs-h3); }
+.agence-voir { text-align: center; font-size: 14px; }
+
+/* ---------- Footer: choix dyal l'logha ---------- */
+.langues { display: flex; gap: 8px; }
+.langues button { background: none; color: #fff; border: 1px solid #fff; border-radius: 999px; padding: 8px 16px; font-size: 14px; font-weight: 500; }
+.langues button.active { background: #fff; color: var(--black); }
+.langues button[lang="ar"] { font-family: 'Cairo', sans-serif; }
+
+/* ---------- L3rbiya (rtl) ---------- */
+/* Montserrat ma fihach l7orouf l3arbiya: Cairo l l'ktaba, Aref Ruqaa l l'écriture script */
+html[lang="ar"] body, html[lang="ar"] .hero h1, html[lang="ar"] button, html[lang="ar"] select, html[lang="ar"] input { font-family: 'Cairo', sans-serif; }
+html[lang="ar"] .script { font-family: 'Aref Ruqaa', serif; font-weight: 700; }
+html[lang="ar"] .hero h1 { line-height: 1.5; }
+/* l'ktaba f jiha limen, so l'dl lbyed katji mn limen */
+html[dir="rtl"] .hero::before {
+  background:
+    linear-gradient(270deg, rgba(255,255,255,.8) 0%, rgba(255,255,255,.7) 45%, rgba(255,255,255,0) 72%),
+    url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1600') center / cover;
+}
+html[dir="rtl"] .agences-head { background-image: linear-gradient(270deg, rgba(0,0,0,.7), rgba(0,0,0,.2)), url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600'); }
+/* l'bordure orange mor l'hero katmchi l jiha lokhra */
+html[dir="rtl"] .hero-wrap::before { right: auto; left: -12px; }
+/* l'animation dyal les mdon katb9a ltr (-50%), walakin l'ktaba wst kol mdina rtl */
+.villes-slider { direction: ltr; }
+html[dir="rtl"] .ville { direction: rtl; }
